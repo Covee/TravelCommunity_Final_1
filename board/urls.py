@@ -4,6 +4,9 @@ from board.views import *
 
 urlpatterns = [
     url(r'^$', PostList.as_view(), name='post_list'),
-    url(r'^board/', korea_board.as_view(), name='korea'),
-    #url(r'^board/post_detail/', PostDetail.as_view(), name='post_detail')
+    url(r'^board/', KoreaBoard.as_view(), name='korea'),
+    url(r'^board/(?P<pk>\d+)/$', PostDetail.as_view(), name='post_detail')
+
 ]
+
+#static(settings.MEDIA.URL, document_root = settings.MEDIA_ROOT)

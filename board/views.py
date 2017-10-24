@@ -1,25 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Post
 from django.views.generic import ListView, DetailView, View, TemplateView
-
+from .models import Post
 
 
 class PostList(View):
-    posts = Post.objects.all()
-    context_object_name = 'posts'
+    #post = Post.objects.all()
+    #context_object_name = 'posts'
     paginate_by = 15
-    
-
-    def index(request):
-        return render(request, 'korea/post_detail.html')
 
 
-class korea_board(TemplateView):
+class PostDetail(DetailView):
+    model = Post
+    template_name = 'korea/post_detail.html'
+
+    '''def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data(**kwargs)
+        context['id'] = Post.objects.filter(pk=self.kwargs.get('pk'))
+        return context'''
+
+
+class KoreaBoard(ListView):
     template_name = 'korea/board.html'
+    model = Post
 
 
-#class PostDetail():
 
 
 

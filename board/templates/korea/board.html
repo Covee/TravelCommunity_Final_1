@@ -45,10 +45,10 @@
                         <div class="col-sm-4 col-md-4">
                             <span class="label label-default">Default</span>
                             <div class="thumbnail" style="height:230px;">
-                                <img src="asdasd.png" alt="...">
+                                <img src="asdasd.png">
                                 <div class="caption">
-                                    {% for post in posts %}
-                                        <h4>{{ post.title }}{{ post.modify_date|date:"Y, m, d"}}</h4>
+                                    {% for post in post_list %}
+                                        <h5><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;{{ post.modify_date|date:"Y, m, d"}}</h5>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                             <div class="thumbnail" style="height:230px;">
                                 <img src="asdasd.png" alt="...">
                                 <div class="caption">
-                                    <p>게시글 1</p>
+                                    <p>게시글 2</p>
                                 </div>
                             </div>
                         </div>
@@ -125,6 +125,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-sm-4 col-md-4">
                             <span class="label label-default">데일리 평점순</span>
                             <div class="thumbnail" style="height:200px;">
