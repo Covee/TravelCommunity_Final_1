@@ -14,15 +14,11 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'korea/post_detail.html'
 
-    '''def get_context_data(self, **kwargs):
-        context = super(PostDetail, self).get_context_data(**kwargs)
-        context['id'] = Post.objects.filter(pk=self.kwargs.get('pk'))
-        return context'''
-
 
 class KoreaBoard(ListView):
     template_name = 'korea/board.html'
     model = Post
+
 
 
 

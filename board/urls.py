@@ -4,8 +4,8 @@ from board.views import *
 
 urlpatterns = [
     url(r'^$', PostList.as_view(), name='post_list'),
-    url(r'^board/', KoreaBoard.as_view(), name='korea'),
-    url(r'^board/(?P<pk>\d+)/$', PostDetail.as_view(), name='post_detail')
+    url(r'^korea/', KoreaBoard.as_view(), name='korea'),
+    url(r'^(?P<pk>\d+)/$', PostDetail.as_view(), name='post_detail')
 
 ]
 
