@@ -47,7 +47,7 @@
                             <div class="thumbnail" style="height:230px;">
                                 <div class="caption">
                                     {% for post in post_list %}
-                                        <h5><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;{{ post.modify_date|date:"Y, m, d"}}</h5>
+                                        <h5><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;{{ post.modify_date|date:"Y-m-d"}}</h5>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -149,6 +149,7 @@
                         <span class="label label-default">세로광고</span>
                         <div class="panel panel-default">
                             <div class="panel-body" style="height:1000px;font-size:10px;">
+                                
                                 세로광고연결 / 이거 길이 자동 조절되게끔 설정 필요할듯
                             </div>
                         </div>

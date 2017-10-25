@@ -29,4 +29,4 @@ class Post(models.Model):
         super(Post, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'pk': self.id})
+        return reverse('korea:post_detail', args={self.id})

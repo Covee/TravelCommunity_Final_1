@@ -5,9 +5,10 @@ from .models import Post
 
 
 class PostList(View):
+	model = Post
     #post = Post.objects.all()
     #context_object_name = 'posts'
-    paginate_by = 15
+    #paginate_by = 15
 
 
 class PostDetail(DetailView):
