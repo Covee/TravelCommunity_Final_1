@@ -22,8 +22,13 @@
         <div class="row">
         <div class="page-header">
             <h1><a href="{% url 'home' %}" style=text-decoration:none>리얼 여행 커뮤니티 </a>
-            <small>한 방에 해결하는 여행 준비!</small>
-            <a href="{% url 'register' %}" style="float: right; margin:0px 30px 0px 0px; font-size: 22px;">로그인/회원가입</a></h1>
+            <small>한 방에 해결하는 여행 준비!</small>{% if user.is_active %}
+            <h4><a href="{% url 'register' %}" style="float: right; margin:0px 30px 0px 0px; font-size: 22px;"><strong>로그아웃 / {% firstof user.get_short_name user.get_username %}</strong></a>
+            </h4>
+            {% else %}
+            <h3><a href="{% url 'register' %}" style="float: right; margin:0px 30px 0px 0px; font-size: 22px;">로그인/회원가입</a></h3>
+            {% endif %}
+            </h1>
         </div>
     </div>
     <div class="row center">
@@ -50,15 +55,14 @@
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <div class="row">
-
+                    
                     <div class="col-sm-5 col-md-5">
                         <div class="panel panel-primary">
                             <div class="panel-body">
-                                <form method="POST" action="#" role="form">{% csrf_token %}
+                                <form method="POST" action="." role="form">{% csrf_token %}
                                     {% if form.errors %}
                                     <p class="errornote"><font size="2px;" color="#FF0000">아이디(ID) 혹은 비밀번호(Password)가 잘못 입력되었습니다.</font></p>
                                     {% endif %}
-
                                     <div class="form-group">
                                         <h1>로그인</h1>
                                     </div>
