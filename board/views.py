@@ -4,11 +4,12 @@ from django.views.generic import ListView, DetailView, View, TemplateView
 from .models import Post
 
 
-class PostList(View):
+class PostList(ListView):
 	model = Post
-    #post = Post.objects.all()
+    #template_name = 'korea/board.html'
     #context_object_name = 'posts'
-    #paginate_by = 15
+    #paginate_by = 9
+    #queryset = Post.objects.all()
 
 
 class PostDetail(DetailView):

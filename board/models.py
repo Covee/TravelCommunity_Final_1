@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     title = models.CharField('TITLE', max_length=50, null=False)
+    #country = models.ForeignKey()
     content = models.TextField('CONTENT', null=False)
     create_date = models.DateTimeField('Create Date', auto_now_add=True)
     modify_date = models.DateTimeField('Modify Date', auto_now=True)
