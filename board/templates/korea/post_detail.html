@@ -9,30 +9,42 @@
                 <div class="col-sm-11 col-md-11">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <p name="zzzz"></p>
+                            <p name="title" style="display: inline;">
+                               {% block title %}
+                                    <b style="font-size: 12px;"> {{ post.id }}&emsp;</style="font-size:></b>
+                                    <b style="font-size: 16px;">{{ post.title }}</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <i>[작성자 평점(오른쪽에 붙이기)]</i>
+                                {% endblock %}
+                            </p>
                         </div>
+
                         <div class="panel-body">
-                            제목 등등
+                            여기 뭐 넣지... 아예 이 박스는 없애는게 좋을 듯
                         </div>
-                        <span class="label label-default">Default</span>
+                        
+                        <span class="label label-default">country</span>
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                Basic panel example
+                                정보들 [유저정보(레벨 등), 포인트, 작성시간,조회수,스크랩버튼 ]
                             </div>
                         </div>
                         <div class="panel-body mainbody" style="height:500px;">
-                                {% for post in post_detail %}
-                                    <h4>{{ post.title }}</h4>
-                                {% endfor %}
+                            <p style="font-size: 15px; font: "">
+                                {{ post.image }} 
+
+                                {{ post.content | linebreaks }}
+                            </p>
 
                         </div>
                     </div>
                 </div>
+                
+
                 <div class="col-sm-1 col-md-1 pull-right">
                     <span class="label label-default">Dsdflt</span>
                     <div class="panel panel-default">
                         <div class="panel-body commercial" style="height:2015px;font-size:10px;">
-                            Basic panel example
+                            세로 광고
                         </div>
                     </div>
                 </div>
@@ -40,7 +52,7 @@
                 <div class="col-sm-11 col-md-11">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            Basic panel example
+                            가로 광고
                         </div>
                     </div>
                 </div>

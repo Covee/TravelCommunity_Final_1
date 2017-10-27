@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 class Post(models.Model):
@@ -30,4 +31,4 @@ class Post(models.Model):
         super(Post, self).delete(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('korea:post_detail', args={self.id})
+        return reverse('post:post_detail', args={self.id})
