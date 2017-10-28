@@ -29,8 +29,8 @@
                             </div>
                         </div>
                         <div class="panel-body mainbody" style="height:500px;">
-                            <p style="font-size: 15px; font: "">
-                                {{ post.image }} 
+                            <p style="font-size: 15px;">
+                            <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
 
                                 {{ post.content | linebreaks }}
                             </p>
