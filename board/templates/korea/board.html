@@ -17,10 +17,10 @@
                             "location.href='{% url 'post_detail' post.id %}'" style="height:230px; cursor:pointer";>
                         <div style="height:180px; padding:auto;">
                             {% if post.image %}
-                                {{ post.image.path }}
+{#                                {{ post.image.path }}#}
                                 {{ post.image.url }}
 
-                            <img src="{{ post.image.path }}" style="height: 100%"; width="100%" alt="">
+                            <img src='{{ post.image.url }}' style="height: 100%"; width="100%" alt="">
                             {% endif %}
                         </div>
 
