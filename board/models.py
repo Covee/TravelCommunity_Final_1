@@ -16,6 +16,7 @@ class Post(models.Model):
     filtered_image = models.ImageField(blank=True, null=True,
                                        upload_to='upload/%Y/%m/%d/filtered')
 
+
     # category = models.ForeignKey(Categories)
     # comments_num = models.PositiveSmallIntegerField(default=0, null=True)
 

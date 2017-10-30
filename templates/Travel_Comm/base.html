@@ -21,52 +21,51 @@
         <div class="page-header">
             <h1><a href="{% url 'home' %}" style=text-decoration:none>리얼 여행 커뮤니티 </a>
                 <small>한 방에 해결하는 여행 준비!</small>
+                    {% load socialaccount %}
+                        {% if user.is_authenticated %}
+                            <div align="right" style="font-size: 18px;"><span>{{ user }}님이 로그인중입니다.</span></div>
+
+                            {% for account in user.socialaccount_set.all %}
+
+                                {% comment %} show avatar from url {% endcomment %}
+                                <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>
+
+                                <p><img width="50" height="50" src="{{ account.get_avatar_url }}"/></p>
+                                <p>UID: <a href="{{ account.extra_data.link }}">{{ account.uid }}</a></p>
+                                <p>Username: {{ account.extra_data.username }}</p>
+                                <p>First Name: {{ account.extra_data.first_name }}</p>
+                                <p>Last Name: {{ account.extra_data.last_name }}</p>
+                                <p>Dashboard Link:
+                                    <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></p>
+                            {% empty %}
+                                <p align="right" style="font-size: 18px;">you haven't any social account please</p>
+                            {% endfor %}
+                        {% endif %}
+                        <p align="right">
+                        <span style="font-size: 20px;"><a href="/accounts/login">로그인</a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="{% provider_login_url "naver" %}"><img src="/static/naver.jpg" width="40" height="40"></a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="{% provider_login_url 'facebook' method='oauth2' %}"><img src="/static/FB.png" width="40" height="40"></a>&ensp;</span> 
+                        <span style="font-size: 20px;"><a href="{% provider_login_url "kakao" %}"><img src="/static/kakao.png" width="40" height="40"></a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="/accounts/logout">로그아웃</a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="/accounts/signup">회원가입</a>&ensp;</span>
+                        </p>
+
+
                 {% if user.is_active %}
                     {#                    <h4><a href="{% url 'logout' %}"#}
                     {#                           style="float: right; margin:0px 30px 0px 0px; font-size: 22px;"><strong>로그아웃#}
                     {#                        / {% firstof user.get_short_name user.get_username %}</strong></a>#}
                     {#                    </h4>#}
                 {% else %}
-
                 {% endif %}
+
+
             </h1>
         </div>
     </div>
 
 
-
-
-
-
-    {% load socialaccount %}
-
-    <h1>hello world</h1>
-    {% if user.is_authenticated %}
-        <span>{{ user }}님이 로그인중입니다.</span>
-
-        {% for account in user.socialaccount_set.all %}
-
-            {% comment %} show avatar from url {% endcomment %}
-            <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>
-
-            <p><img width="50" height="50" src="{{ account.get_avatar_url }}"/></p>
-
-            <p>UID: <a href="{{ account.extra_data.link }}">{{ account.uid }}</a></p>
-
-            <p>Username: {{ account.extra_data.username }}</p>
-            <p>First Name: {{ account.extra_data.first_name }}</p>
-            <p>Last Name: {{ account.extra_data.last_name }}</p>
-
-            <p>Dashboard Link:
-                <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></p>
-        {% empty %}
-            <p>you haven't any social account please</p>
-        {% endfor %}
-    {% endif %}
-    <h2><a href="/accounts/login">로그인</a></h2>
-    <h2><a href="{% provider_login_url 'facebook' method='oauth2' %}">페이스북 로그인</a></h2>
-    <h2><a href="/accounts/logout">로그아웃</a></h2>
-    <h2><a href="/accounts/signup">회원가입</a></h2>
+    
 
 
 

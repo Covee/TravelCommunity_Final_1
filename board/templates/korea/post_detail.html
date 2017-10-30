@@ -14,6 +14,7 @@
                                     <b style="font-size: 12px;"> {{ post.id }}&emsp;</style="font-size:></b>
                                     <b style="font-size: 16px;">{{ post.title }}</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                     <i>[작성자 평점(오른쪽에 붙이기)]</i>
+                                    
                                 {% endblock %}
                             </p>
                         </div>
@@ -28,7 +29,7 @@
                                 정보들 [유저정보(레벨 등), 포인트, 작성시간,조회수,스크랩버튼 ]
                             </div>
                         </div>
-                        <div class="panel-body mainbody" style="height:500px;">
+                        <div class="panel-body mainbody" style="height:auto; ">
                             <p style="font-size: 15px;">
                             <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
 
