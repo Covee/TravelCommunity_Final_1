@@ -16,3 +16,4 @@ requests==2.18.4
 requests-oauthlib==0.8.0
 urllib3==1.22
 django-hitcount==1.1.1
+django-star-ratings

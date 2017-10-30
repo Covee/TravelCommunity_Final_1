@@ -24,11 +24,23 @@
                         </div>
                         
                         <span class="label label-default">country</span>
+
+                        {% load static %}
+                        {% load ratings %}
+
+                        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+                        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+
+
+                        
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <div align="right">{% ratings object %}</div>
                                 정보들 [유저정보(레벨 등), 포인트, 작성시간,조회수,스크랩버튼 ]
                             </div>
                         </div>
+
                         <div class="panel-body mainbody" style="height:auto; ">
                             <p style="font-size: 15px;">
                             <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">

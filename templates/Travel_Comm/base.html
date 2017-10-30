@@ -28,9 +28,9 @@
                             {% for account in user.socialaccount_set.all %}
 
                                 {% comment %} show avatar from url {% endcomment %}
-                                <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>
+                                <h2 style="text-transform:capitalize;">{{ account.provider }} 로그인 성공 >3<</h2>
 
-                                <p><img width="50" height="50" src="{{ account.get_avatar_url }}"/></p>
+                                <p><img width="100" height="100" src="{{ account.get_avatar_url }}"/></p>
                                 <p>UID: <a href="{{ account.extra_data.link }}">{{ account.uid }}</a></p>
                                 <p>Username: {{ account.extra_data.username }}</p>
                                 <p>First Name: {{ account.extra_data.first_name }}</p>
@@ -38,7 +38,7 @@
                                 <p>Dashboard Link:
                                     <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></p>
                             {% empty %}
-                                <p align="right" style="font-size: 18px;">you haven't any social account please</p>
+                                <p align="right" style="font-size: 18px;">you have no Social Accounts saved in this site</p>
                             {% endfor %}
                         {% endif %}
                         <p align="right">
@@ -59,16 +59,12 @@
                 {% else %}
                 {% endif %}
 
-
             </h1>
         </div>
     </div>
 
 
     
-
-
-
 
 
 

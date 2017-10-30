@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
+    'star_ratings',
 
 
 ]
