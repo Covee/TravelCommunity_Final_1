@@ -19,31 +19,54 @@
                             </p>
                         </div>
 
+
+
                         <div class="panel-body">
                             여기 뭐 넣지... 아예 이 박스는 없애는게 좋을 듯
                         </div>
                         
-                        <span class="label label-default">country</span>
+
+
+                        
+                        <span class="label label-default">{{ post.country }}</span>
 
                         {% load static %}
                         {% load ratings %}
 
                         <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
                         <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-
-
-
                         
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <div align="right">{% ratings object %}</div>
-                                정보들 [유저정보(레벨 등), 포인트, 작성시간,조회수,스크랩버튼 ]
+
+                                <table border="0" width="1000" height="120">
+                                    <tr>
+                                        <td valign=top>
+                                            <b>NAME</b>: {{ post.user }}
+                                        </td>
+                                        <td>
+                                            <div align="right" valign=top>{% ratings object %}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            정보들 [유저정보(레벨 등), 포인트, 조회수,스크랩버튼 ]
+                                        </td>
+                                        <td align="right">
+                                            <b>DATE</b>: {{ post.modify_date }}
+                                        </td>
+                                    </tr>
+                                
+                                </table>
+
                             </div>
                         </div>
 
                         <div class="panel-body mainbody" style="height:auto; ">
                             <p style="font-size: 15px;">
+                                {% if post.image.url == True %}
                             <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
+                                {% endif %}
 
                                 {{ post.content | linebreaks }}
                             </p>

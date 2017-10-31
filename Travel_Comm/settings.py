@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
     'star_ratings',
+    'django_countries',
 
 
 ]

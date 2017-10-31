@@ -4,10 +4,13 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from PIL import Image
 
+from django_countries.fields import CountryField
+
 
 class Post(models.Model):
     title = models.CharField('TITLE', max_length=50, null=False)
-    #country = models.ForeignKey()
+    country = CountryField(blank_label='(select country)', null=True)
+    #country = models.ForeignKey(Country, on_delete=models.CASCADE)
     content = models.TextField('CONTENT', null=False)
     create_date = models.DateTimeField('Create Date', auto_now_add=True)
     modify_date = models.DateTimeField('Modify Date', auto_now=True)
@@ -33,3 +36,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post:post_detail', args={self.id})
+
+
+    

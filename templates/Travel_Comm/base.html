@@ -28,15 +28,15 @@
                             {% for account in user.socialaccount_set.all %}
 
                                 {% comment %} show avatar from url {% endcomment %}
-                                <h2 style="text-transform:capitalize;">{{ account.provider }} 로그인 성공 >3<</h2>
+                                <h3 style="text-transform:capitalize;">{{ account.provider }} 로그인 성공 >3<</h3>
 
-                                <p><img width="100" height="100" src="{{ account.get_avatar_url }}"/></p>
-                                <p>UID: <a href="{{ account.extra_data.link }}">{{ account.uid }}</a></p>
-                                <p>Username: {{ account.extra_data.username }}</p>
-                                <p>First Name: {{ account.extra_data.first_name }}</p>
-                                <p>Last Name: {{ account.extra_data.last_name }}</p>
-                                <p>Dashboard Link:
-                                    <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></p>
+                                <img width="100" height="100" src="{{ account.get_avatar_url }}"/>
+                                <small>UID: <a href="{{ account.extra_data.link }}">{{ account.uid }}</a></small>
+                                <small>Username: {{ account.extra_data.username }}</small>
+                                <small>First Name: {{ account.extra_data.first_name }}</small>
+                                <small>Last Name: {{ account.extra_data.last_name }}</small>
+                                <small>Dashboard Link:
+                                    <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></small>
                             {% empty %}
                                 <p align="right" style="font-size: 18px;">you have no Social Accounts saved in this site</p>
                             {% endfor %}
