@@ -12,7 +12,7 @@
                             <p name="title" style="display: inline;">
                                {% block title %}
                                     <b style="font-size: 12px;"> {{ post.id }}&emsp;</style="font-size:></b>
-                                    <b style="font-size: 16px;">{{ post.title }}</b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <b style="font-size: 16px;">{{ post.title }}</b>&ensp;<span style="font-size: 14px;" style="color: gray">[{{ post.comments.count }}]</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                     <i>[작성자 평점(오른쪽에 붙이기)]</i>
                                     
                                 {% endblock %}
@@ -51,6 +51,7 @@
                                     <tr>
                                         <td>
                                             정보들 [유저정보(레벨 등), 포인트, 조회수,스크랩버튼 ]
+
                                         </td>
                                         <td align="right">
                                             <b>DATE</b>: {{ post.modify_date }}
@@ -64,14 +65,37 @@
 
                         <div class="panel-body mainbody" style="height:auto; ">
                             <p style="font-size: 15px;">
-                                {% if post.image.url == True %}
                                 <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
-                                {% endif %}
+
                                 {{ post.content | linebreaks }}
                             </p>
 
                         </div>
                     </div>
+                    <hr>
+                    <h3>댓글<small>(Comments)</small></h3>
+                    <div>
+                    {% for comment in post.comments.all %}
+                        <table border="1" width="1000" height="30">
+                            <tr>
+                                <td width="100"><strong style="font-size: 18px;">
+                                    {{ comment.user }}    
+                                </strong></td>
+                                <td style="font-size: 13px;" width="700">
+                                    {{ comment.message|linebreaks }}    
+                                </td>
+                                <td>
+                                    {{ comment.created_at }}    
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                        
+                        
+                    {% empty %}
+                        <p>댓글이 없습니당</p>
+                    {% endfor %}
                 </div>
                 
 

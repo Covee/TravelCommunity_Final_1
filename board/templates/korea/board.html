@@ -25,7 +25,9 @@
 
                                 <div class="caption">
                                     <h5>
-                                        <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a><p>{{ post.modify_date|date:"Y, m, d" }}&emsp;&emsp;작성자: {{ post.user }}</p>
+                                        <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>[{{ post.comments.count }}]<p>
+                                        {{ post.modify_date|date:"Y, m, d" }}
+                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;작성자: {{ post.user }}</p>
                                     </h5>
                                 </div>
                             </div>
