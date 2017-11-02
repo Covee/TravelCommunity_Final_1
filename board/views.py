@@ -7,7 +7,6 @@ from .models import Post
 class PostList(ListView):
 	model = Post
     #template_name = 'korea/board.html'
-    #context_object_name = 'posts'
     #paginate_by = 9
     #queryset = Post.objects.all()
 
@@ -20,6 +19,7 @@ class PostDetail(DetailView):
 class KoreaBoard(ListView):
     template_name = 'korea/board.html'
     model = Post
+
 
 
 

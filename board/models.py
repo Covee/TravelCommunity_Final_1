@@ -18,10 +18,8 @@ class Post(models.Model):
     image = models.ImageField(blank=True, null=True, upload_to='upload/%Y/%m/%d/orig')
     filtered_image = models.ImageField(blank=True, null=True,
                                        upload_to='upload/%Y/%m/%d/filtered')
-
-
+    
     # category = models.ForeignKey(Categories)
-    # comments_num = models.PositiveSmallIntegerField(default=0, null=True)
 
     def __str__(self):
         return self.title
@@ -38,4 +36,12 @@ class Post(models.Model):
         return reverse('post:post_detail', args={self.id})
 
 
-    
+class Comment(models.Model):
+    post = models.ForeignKey(Post)
+    user = models.ForeignKey(User)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.message

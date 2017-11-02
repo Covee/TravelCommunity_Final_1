@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^board/', include('board.urls')),
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/logout/', auth_views.logout, name='logout', kwargs={
+    	'next_page': '/',
+    	})
 
 
 ]

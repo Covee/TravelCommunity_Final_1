@@ -65,9 +65,8 @@
                         <div class="panel-body mainbody" style="height:auto; ">
                             <p style="font-size: 15px;">
                                 {% if post.image.url == True %}
-                            <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
+                                <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
                                 {% endif %}
-
                                 {{ post.content | linebreaks }}
                             </p>
 
