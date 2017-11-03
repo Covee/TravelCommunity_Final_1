@@ -71,32 +71,54 @@
 
                         </div>
                     </div>
-                    <hr>
+
+                    <div class="col-sm-13 col-md-13">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                가로 광고
+                            </div>
+                        </div>
+                    </div>
+
+
                     <h3>댓글<small>(Comments)</small></h3>
-                    <div>
+
                     {% for comment in post.comments.all %}
-                        <table border="1" width="1000" height="30">
+                    <div class="col-sm-13">
+                        <table class="form-control" border="1" bgcolor="gray" width="1000" style="height: 100%">
                             <tr>
                                 <td width="100"><strong style="font-size: 18px;">
                                     {{ comment.user }}    
                                 </strong></td>
-                                <td style="font-size: 13px;" width="700">
+                                <td style="font-size: 13px; text-align: left; width: 715px;">
                                     {{ comment.message|linebreaks }}    
                                 </td>
-                                <td>
+                                <td style="width: 200px;">
                                     {{ comment.created_at }}    
                                 </td>
                             </tr>
-                            
                         </table>
                     </div>
-                        
-                        
+                    </div>
                     {% empty %}
                         <p>댓글이 없습니당</p>
                     {% endfor %}
                 </div>
-                
+
+                <hr/>
+
+                <div class="col-sm-11 well">
+                    <form accept-charset="UTF-8" action="" method="POST">{% csrf_token %}
+                        <textarea class="form-control" id="text" name="text" placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"
+                                  rows="5"></textarea>
+                        <h6 class="pull-right" id="count_message"></h6>
+                        <button class="btn btn-info pull-right" type="submit">댓글 입력</button>
+                        <strong style="font-size: 18px;">{{ post.user }}</strong>
+                    </form>
+                </div>
+
+                <hr>
+
 
                 <div class="col-sm-1 col-md-1 pull-right">
                     <span class="label label-default">Dsdflt</span>
@@ -107,13 +129,6 @@
                     </div>
                 </div>
 
-                <div class="col-sm-11 col-md-11">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            가로 광고
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-11 col-md-11" style="padding:10px 10px 30px 10px;">
                     <a class="btn icon-btn btn-primary" style="margin:5px; width:150px; height:40px;" href="#"><span
                             class="glyphicon btn-glyphicon glyphicon-thumbs-up img-circle text-primary"></span>Like</a>
@@ -126,15 +141,7 @@
                     <a class="btn icon-btn btn-info" style="margin:5px; width:150px; height:40px;" href="#"><span
                             class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>Share</a>
                 </div>
-                <div class="col-sm-11 well">
-                    <form accept-charset="UTF-8" action="" method="POST">
-                        <textarea class="form-control" id="text" name="text" placeholder="Type in your message"
-                                  rows="5"></textarea>
-                        <h6 class="pull-right" id="count_message"></h6>
-                        <button class="btn btn-info pull-right" type="submit">Post New Message</button>
-                        xs
-                    </form>
-                </div>
+                
 
 
                 <div class="col-sm-11 col-md-11">
