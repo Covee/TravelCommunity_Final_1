@@ -11,8 +11,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,18 +20,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'board',
+    'el_pagination',
+    'PIL',
+    'easy_thumbnails',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'board',
+    'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.kakao',
+    'star_ratings',
+    'django_countries',
+
 ]
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
-
-# http://localhost:8000/accounts/facebook/login/callbacks
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -44,6 +47,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
 
 ROOT_URLCONF = 'Travel_Comm.urls'
 
@@ -58,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -74,6 +88,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -127,8 +145,17 @@ SOCIALACCOUNT_PROVIDERS = {
             'updated_time',
         ],
         'EXCHANGE_TOKEN': True,
-        'LOCALE_FUNC': lambda request: 'en_US',
+        'LOCALE_FUNC': lambda request: 'kr_KR',
         'VERIFIED_EMAIL': True,
         'VERSION': 'v2.5',
     }
 }
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
+EL_PAGINATION_PER_PAGE = 9
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

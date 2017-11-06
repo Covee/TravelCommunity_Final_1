@@ -1,118 +1,134 @@
-<!DOCTYPE html>
-<html>
+{% extends 'Travel_Comm/base.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+{% block content %}
 
-    <style>
-        .center {
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .pagination a {
-            width: 80px;
-        }
-
-        .coommercial {
-            height: 100%;
-            display: flex;
-        }
-
-        .btn-glyphicon {
-            padding: 8px;
-            background: #ffffff;
-            margin-right: 4px;
-        }
-
-        .icon-btn {
-            padding: 1px 15px 3px 2px;
-            border-radius: 50px;
-        }
-    </style>
-    <title></title>
-</head>
-
-<body>
-<div class="container">
-    <div class="row">
-        <div class="page-header">
-            <h1><a href="{% url 'home' %}" style=text-decoration:none>리얼 여행 커뮤니티 </a>
-                <small>한 방에 해결하는 여행 준비!</small>
-                <a href="#" style="float: right; margin:0px 30px 0px 0px; font-size: 25px;">로그인</a></h1>
-        </div>
-    </div>
-    <div class="row center">
-        <ul class="nav nav-pills">
-            <li role="presentation" class="active" style='width:130px; text-align:center; margin: 5px 5px 20px 5px' ;><a
-                    href="{% url 'korea' %}">한국</a></li>
-            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>동남아</a>
-            </li>
-            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>유럽</a>
-            </li>
-            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>북미</a>
-            </li>
-            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>남미</a>
-            </li>
-            <li role="presentation"><a href="#" style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>호주</a>
-            </li>
-            <li role="presentation"><a href="#"
-                                       style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>아프리카</a></li>
-            <li role="presentation"><a href="#"
-                                       style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>자유게시판</a></li>
-        </ul>
-
-    </div>
-    <div class="row">
+<div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="row">
 
                 <div class="col-sm-11 col-md-11">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <p name="zzzz"></p>
+                            <p name="title" style="display: inline;">
+                               {% block title %}
+                                    <b style="font-size: 12px;"> {{ post.id }}&emsp;</style="font-size:></b>
+                                    <b style="font-size: 16px;">{{ post.title }}</b>&ensp;<span style="font-size: 14px;" style="color: gray">[{{ post.comments.count }}]</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <i>[작성자 평점(오른쪽에 붙이기)]</i>
+                                    
+                                {% endblock %}
+                            </p>
                         </div>
+
+
                         <div class="panel-body">
-                            제목 등등
+                            여기 뭐 넣지... 아예 이 박스는 없애는게 좋을 듯
                         </div>
-                        <span class="label label-default">Default</span>
+                        
+
+                        
+                        <span class="label label-default">{{ post.country }}</span>
+
+                        {% load static %}
+                        {% load ratings %}
+
+                        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+                        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+                        
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                Basic panel example
+
+                                <table border="0" width="1000" height="120">
+                                    <tr>
+                                        <td valign=top>
+                                            <b>NAME</b>: {{ post.user }}
+                                        </td>
+                                        <td>
+                                            <div align="right" valign=top>{% ratings object %}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            정보들 [유저정보(레벨 등), 포인트, 조회수,스크랩버튼 ]
+
+                                        </td>
+                                        <td align="right">
+                                            <b>DATE</b>: {{ post.modify_date }}
+                                        </td>
+                                    </tr>
+                                
+                                </table>
+
                             </div>
                         </div>
-                        <div class="panel-body mainbody" style="height:500px;">
-                            {% block content %}
-                                {% for post in post_detail %}
-                                    <h4>{{ post.title }}</h4>
-                                {% endfor %}
-                            {% endblock content %}
+
+                        <div class="panel-body mainbody" style="height:auto; ">
+                            <p style="font-size: 15px;">
+                                {% if post.image.url == True %}
+                                <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
+                                {% endif %}
+                                {{ post.content | linebreaks }}
+                            </p>
 
                         </div>
                     </div>
+
+                    <div class="col-sm-13 col-md-13">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                가로 광고
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h3>댓글<small>(Comments)</small></h3>
+
+                    {% for comment in post.comments.all %}
+                    <div class="col-sm-13">
+                        <table class="form-control" border="1" bgcolor="gray" width="1000" style="height: 100%">
+                            <tr>
+                                <td width="100"><strong style="font-size: 18px;">
+                                    {{ comment.user }}    
+                                </strong></td>
+                                <td style="font-size: 13px; text-align: left; width: 715px;">
+                                    {{ comment.message|linebreaks }}    
+                                </td>
+                                <td style="width: 200px;">
+                                    {{ comment.created_at }}    
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                    {% empty %}
+                        <p>댓글이 없습니당</p>
+                    {% endfor %}
                 </div>
+
+                <hr/>
+
+                <div class="col-sm-11 well">
+                    <form accept-charset="UTF-8" action="" method="POST">{% csrf_token %}
+                        <textarea class="form-control" id="text" name="text" placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"
+                                  rows="5"></textarea>
+                        <h6 class="pull-right" id="count_message"></h6>
+                        <button class="btn btn-info pull-right" type="submit">댓글 입력</button>
+                        <strong style="font-size: 18px;">{{ post.user }}</strong>
+                    </form>
+                </div>
+
+                <hr>
+
+
                 <div class="col-sm-1 col-md-1 pull-right">
-                    <span class="label label-default">Default</span>
+                    <span class="label label-default">Dsdflt</span>
                     <div class="panel panel-default">
                         <div class="panel-body commercial" style="height:2015px;font-size:10px;">
-                            Basic panel example
+                            세로 광고
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-11 col-md-11">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            Basic panel example
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-11 col-md-11" style="padding:10px 10px 30px 10px;">
                     <a class="btn icon-btn btn-primary" style="margin:5px; width:150px; height:40px;" href="#"><span
                             class="glyphicon btn-glyphicon glyphicon-thumbs-up img-circle text-primary"></span>Like</a>
@@ -125,15 +141,7 @@
                     <a class="btn icon-btn btn-info" style="margin:5px; width:150px; height:40px;" href="#"><span
                             class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>Share</a>
                 </div>
-                <div class="col-sm-11 well">
-                    <form accept-charset="UTF-8" action="" method="POST">
-                        <textarea class="form-control" id="text" name="text" placeholder="Type in your message"
-                                  rows="5"></textarea>
-                        <h6 class="pull-right" id="count_message"></h6>
-                        <button class="btn btn-info pull-right" type="submit">Post New Message</button>
-                        xs
-                    </form>
-                </div>
+                
 
 
                 <div class="col-sm-11 col-md-11">
@@ -177,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                    <
+                    
                     <div class="col-sm-4 col-md-4">
                         <span class="label label-default">Default</span>
                         <div class="thumbnail" style="height:230px;">
@@ -280,33 +288,4 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-6 col-md-6">
-                    <span class="label label-default">Default</span>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            Basic panel example
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-md-6">
-                    <span class="label label-default">Default</span>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            Basic panel example
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-    </div>
-</div>
-</div>
-</body>
-
-</html>
-
+            {% endblock %}
