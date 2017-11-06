@@ -6,5 +6,6 @@ from Travel_Comm.views import HomeView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^board/', include('board.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^$', HomeView.as_view(template_name='Travel_Comm/home.html'), name='home'),
 ]
