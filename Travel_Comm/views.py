@@ -5,19 +5,15 @@ from django.core.urlresolvers import reverse_lazy
 
 
 class HomeView(TemplateView):
-	template_name = 'Travel_Comm/home.html'
+    template_name = 'Travel_Comm/home.html'
 
 
 # 로그인 인증기능
 class CreateUserView(CreateView):
-	template_name = 'registration/register.html'
-	form_class = CreateUserForm
-	success_url = reverse_lazy('register_done')
+    template_name = 'registration/register.html'
+    form_class = CreateUserForm
+    success_url = reverse_lazy('register_done')
 
 
 class RegisteredView(TemplateView):
-	template_name = 'registration/register_done.html'
-
-
-
-
+    template_name = 'registration/register_done.html'
