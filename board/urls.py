@@ -4,20 +4,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-<<<<<<< HEAD
     url(r'^$', PostList.as_view(), name='post_list'),
     url(r'^korea/$', KoreaBoard.as_view(), name='korea'),
     url(r'^korea/(?P<pk>\d+)/$', PostDetail.as_view(), name='post_detail'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
-    #url(r'^korea/(?P<pk>\d+)/', PostDetail.as_view(), name='add_comment'),
+    url(r'^korea/(?P<pk>\d+)/', add, name='add_comment'),
+
+# 11/9 글쓰기 기능 구현 위해 작성
+    url(r'^add/$', PostAdd.as_view(), name='post_add'),
+    url(r'^change/', PostChange.as_view(), name='post_change'),
+    url(r'^update/', PostUpdate.as_view(), name='post_update'),
+    url(r'^delete/', PostDelete.as_view(), name='post_delete'), 
     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-=======
-                  url(r'^$', PostList.as_view(), name='post_list'),
-                  url(r'^korea/$', KoreaBoard.as_view(), name='korea'),
-                  url(r'^korea/(?P<pk>\d+)/$', PostDetail.as_view(), name='post_detail'),
-                  url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
->>>>>>> 6dcd947b65d703676b5b5adeb4a3b1dc15cabda2
