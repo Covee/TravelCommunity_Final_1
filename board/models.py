@@ -10,6 +10,7 @@ from django_countries.fields import CountryField
 class Post(models.Model):
     title = models.CharField('TITLE', max_length=50, null=False)
     country = CountryField(blank_label='(select country)', null=True)
+
     #country = models.ForeignKey(Country, on_delete=models.CASCADE)
     content = models.TextField('CONTENT', null=False)
     create_date = models.DateTimeField('Create Date', auto_now_add=True)
@@ -32,6 +33,9 @@ class Post(models.Model):
         self.filtered_image.delete()
         super(Post, self).delete(*args, **kwargs)
 
+    def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)   # 글쓰기 기능 구현 위해 추가 11/9
+
     def get_absolute_url(self):
         return reverse('post:post_detail', args={self.id})
 
@@ -53,3 +57,4 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('created_at',)
+

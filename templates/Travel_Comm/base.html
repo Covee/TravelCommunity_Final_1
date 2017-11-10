@@ -53,10 +53,10 @@
 
 
                 {% if user.is_active %}
-                    {#                    <h4><a href="{% url 'logout' %}"#}
-                    {#                           style="float: right; margin:0px 30px 0px 0px; font-size: 22px;"><strong>로그아웃#}
-                    {#                        / {% firstof user.get_short_name user.get_username %}</strong></a>#}
-                    {#                    </h4>#}
+                    {#        <h4><a href="{% url 'logout' %}"#}
+                    {#        style="float: right; margin:0px 30px 0px 0px; font-size: 22px;"><strong>로그아웃#}
+                    {#        / {% firstof user.get_short_name user.get_username %}</strong></a>#}
+                    {#         </h4>#}
                 {% else %}
                 {% endif %}
 
@@ -89,6 +89,10 @@
             <li role="presentation"><a href="#"
                                        style='width:130px; text-align:center; margin: 5px 5px 20px 5px'>자유게시판</a></li>
         </ul>
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-info"><a href="{% url 'post_add' %}" style="font-size: 15px; color: white;">글쓰기</button>
     </div>
 
     {% block content %}
