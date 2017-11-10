@@ -43,7 +43,7 @@ class PostAdd(CreateView):
     model = Post
     template_name = 'korea/post_add.html'
     fields = ['title', 'country','content','image']
-    success_url = reverse_lazy('board:korea')
+    success_url = reverse_lazy('korea')
 
     def form_valid(self, form):
         form.instance.user = self.request.user

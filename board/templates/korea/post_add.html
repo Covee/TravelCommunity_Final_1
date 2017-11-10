@@ -2,17 +2,16 @@
 
 {% block content %}
 
-<div class="row">
-    <h1>글쓰기 - {{ user }}</h1>
+    <h1 style="color: black;">글쓰기 - {{ user }}</h1>
 
         <form action="" method="POST">{% csrf_token %}
             {% if form.errors %}
                 <p class="errornote">뭔가가 틀렸당</p>
             {% endif %}
 
-            <p>새로운 POST를 작성 해 주세용~</p>
+            <p style="color: black;">새로운 POST를 작성 해 주세용~</p>
 
-            <fieldset class="aligned">
+            <fieldset class="aligned" style="color: black;">
                 <div class="form-row">
                     {{ form.title.label_tag }} {{ form.title }}    
                 </div>
@@ -20,10 +19,10 @@
                     {{ form.country.label_tag }} {{ form.country }}    
                 </div>
                 <div class="form-row">
-                    {{ form.image.label_tag }} {{ form.image }}    
+                    {{ form.content.label_tag }} {{ form.content }}    
                 </div>
                 <div class="form-row">
-                    {{ form.content.label_tag }} {{ form.content }}    
+                    {{ form.image.label_tag }} {{ form.image }}    
                 </div>
             </fieldset>
             
@@ -32,7 +31,7 @@
                 </div>
                 <script type="text/javascript">document.getElementById('id_title').focus();</script>
         </form>
-    </div>
+
 
 
                     <div class="col-sm-4 col-md-4">
