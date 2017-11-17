@@ -25,9 +25,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-        # return reverse('korea:post_detail', args=(self.id,))
-
     def delete(self, *args, **kwargs):
         self.image.delete()
         self.filtered_image.delete()
@@ -37,7 +34,7 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)   # 글쓰기 기능 구현 위해 추가 11/9
 
     def get_absolute_url(self):
-        return reverse('post:post_detail', args={self.id})
+        return reverse('post_detail', args={self.id})
 
 
 class Comment(models.Model):

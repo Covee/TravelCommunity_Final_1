@@ -24,21 +24,6 @@ class KoreaBoard(ListView):
     model = Post
 
 
-def add(request, pk):
-    #post = get_object_or_404(Post, pk=pk)
-    template_name = 'korea/post_detail.html'
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = Post.objects.get(pk=pk)
-            comment.save()
-            return redirect('korea/post_detail/', pk=pk)
-    else:
-        form = CommentForm()
-    return render(request, '/post_detail.html', {'form': form})
-
-
 class PostAdd(FormView):
     model = Post
     template_name = 'korea/post_add.html'
@@ -54,19 +39,10 @@ class PostAdd(FormView):
         return super(PostAdd, self).form_valid(form)
 
 
-
-
-class PostChange(ListView):
-    template_name = 'board/korea/change_list.html'
-
-    def get_queryset(self):
-        return Post.objects.filter(user=self.request.user)
-
-
-class PostUpdate(UpdateView):
+class PostEdit(UpdateView):
     model = Post
     fields = ['title', 'country','content','image']
-    success_url = reverse_lazy('board:korea')
+    template_name = 'korea/post_edit.html'
 
 
 class PostDelete(DeleteView):

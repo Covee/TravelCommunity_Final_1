@@ -14,7 +14,9 @@
                                     <b style="font-size: 12px;"> {{ post.id }}&emsp;</style="font-size:></b>
                                     <b style="font-size: 16px;">{{ post.title }}</b>&ensp;<span style="font-size: 14px;" style="color: gray">[{{ post.comments.count }}]</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                     <i>[작성자 평점(오른쪽에 붙이기)]</i>
-                                    
+                                    {% if user.is_authenticated %}
+                                    <a class="btn btn-info" href="{% url 'post_edit' pk=post.id %}"><span class="glyphicon glyphicon-pencil" ></span></a>
+                                    {% endif %}
                                 {% endblock %}
                             </p>
                         </div>
