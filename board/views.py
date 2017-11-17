@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, View, TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 class PostList(ListView):
@@ -39,15 +39,26 @@ def add(request, pk):
     return render(request, '/post_detail.html', {'form': form})
 
 
-class PostAdd(CreateView):
+class PostAdd(FormView):
     model = Post
     template_name = 'korea/post_add.html'
+    form_class = PostForm
     fields = ['title', 'country','content','image']
     success_url = reverse_lazy('korea')
 
+    def get_form_kwargs(self):
+        kwargs = super(PostAdd, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        form.save()
         return super(PostAdd, self).form_valid(form)
+
+
 
 
 class PostChange(ListView):

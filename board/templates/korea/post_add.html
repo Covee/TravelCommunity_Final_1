@@ -3,33 +3,36 @@
 {% block content %}
 
     <h1 style="color: black;">글쓰기 - {{ user }}</h1>
+        
+
 
         <form action="" method="POST">{% csrf_token %}
             {% if form.errors %}
                 <p class="errornote">뭔가가 틀렸당</p>
             {% endif %}
 
-            <p style="color: black;">새로운 POST를 작성 해 주세용~</p>
+            <div class="form-group">
+                <p style="color: black;">새로운 POST를 작성 해 주세용~</p>
 
-            <fieldset class="aligned" style="color: black;">
-                <div class="form-row">
-                    {{ form.title.label_tag }} {{ form.title }}    
+                <fieldset class="aligned" style="color: black;" >
+                        {{ form.title.label_tag }} {{ form.title }}
+                    
+                    <div class="form-row">
+                        {{ form.country.label_tag }} {{ form.country }}    
+                    </div>
+                    <div class="form-row">
+                        {{ form.content.label_tag }} {{ form.content }}    
+                    </div>
+                    <div class="form-row">
+                        {{ form.image.label_tag }} {{ form.image }}    
+                    </div>
+                </fieldset>
+                
+                    <div class="submit-row">
+                        <input type="submit" value="작성">
+                    </div>
+                    <script type="text/javascript">document.getElementById('id_title').focus();</script>
                 </div>
-                <div class="form-row">
-                    {{ form.country.label_tag }} {{ form.country }}    
-                </div>
-                <div class="form-row">
-                    {{ form.content.label_tag }} {{ form.content }}    
-                </div>
-                <div class="form-row">
-                    {{ form.image.label_tag }} {{ form.image }}    
-                </div>
-            </fieldset>
-            
-                <div class="submit-row">
-                    <input type="submit" name="작성">
-                </div>
-                <script type="text/javascript">document.getElementById('id_title').focus();</script>
         </form>
 
 
@@ -59,5 +62,5 @@
                         </div>
                     </div>
                 </div>
-        }
+        
 {% endblock %}
