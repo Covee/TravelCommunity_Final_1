@@ -9,7 +9,7 @@ from django_countries.fields import CountryField
 
 class Post(models.Model):
     title = models.CharField('TITLE', max_length=50, null=False)
-    country = CountryField(blank_label='(select country)', null=True)
+    country = CountryField(blank_label='국가 선택', blank=True)
 
     #country = models.ForeignKey(Country, on_delete=models.CASCADE)
     content = models.TextField('CONTENT', null=False)

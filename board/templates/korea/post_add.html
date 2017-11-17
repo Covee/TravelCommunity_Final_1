@@ -6,7 +6,7 @@
         
 
 
-        <form action="" method="POST">{% csrf_token %}
+        <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
             {% if form.errors %}
                 <p class="errornote">뭔가가 틀렸당</p>
             {% endif %}

@@ -46,16 +46,11 @@ class PostAdd(FormView):
     fields = ['title', 'country','content','image']
     success_url = reverse_lazy('korea')
 
-    def get_form_kwargs(self):
-        kwargs = super(PostAdd, self).get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
-
-
     def form_valid(self, form):
+        post = Post()
         form.instance.user = self.request.user
 
-        form.save()
+        post = form.save()
         return super(PostAdd, self).form_valid(form)
 
 

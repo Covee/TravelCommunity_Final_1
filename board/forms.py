@@ -6,15 +6,13 @@ from django.forms import ModelForm, Textarea
 
 
 class PostForm(forms.ModelForm):
-    #image = forms.Field(max_length=Post._meta.get_field('image').max_length)
     class Meta:
         model = Post
-        fields = ('title', 'country', 'image', 'content')
-        widgets = {'country': CountrySelectWidget(), 'content': Textarea(attrs={'class': 'form-control' })}
+        fields = ['title', 'country', 'content', 'image',]
+        widgets = {'country': CountrySelectWidget(),
+                   'content': Textarea(attrs={'class': 'form-control' })
+            }
 
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request')
-        super(PostForm, self).__init__(*args, **kwargs)
 
 
 class CommentForm(forms.ModelForm):

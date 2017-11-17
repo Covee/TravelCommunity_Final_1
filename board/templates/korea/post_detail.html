@@ -61,10 +61,10 @@
                             </div>
                         </div>
 
-                        <div class="panel-body mainbody" style="height:auto; ">
+                        <div class="panel-body mainbody" style="height:auto;">
                             <p style="font-size: 15px;">
-                                {% if post.image.url == True %}
-                                <img src="{{ post.image.url }}" style="height: 100%"; width="100%" alt="">
+                                {% if post.image %}
+                                <img src='{{ post.image.url }}' style="height: 100%"; width="100%" alt="">
                                 {% endif %}
                                 {{ post.content | linebreaks }}
                             </p>
