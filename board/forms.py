@@ -14,6 +14,14 @@ class PostForm(forms.ModelForm):
             }
 
 
+class PostEditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'country', 'content', 'image',]
+        widgets = {'country': CountrySelectWidget(),
+                   'content': Textarea(attrs={'class': 'form-control' })
+            }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

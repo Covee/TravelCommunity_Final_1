@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, View, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.core.urlresolvers import reverse_lazy
 from .models import Post, Comment
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, PostEditForm
 
 
 class PostList(ListView):
@@ -41,7 +41,7 @@ class PostAdd(FormView):
 
 class PostEdit(UpdateView):
     model = Post
-    fields = ['title', 'country','content','image']
+    form_class = PostEditForm
     template_name = 'korea/post_edit.html'
 
 
