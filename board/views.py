@@ -47,6 +47,7 @@ class PostEdit(UpdateView):
 
 class PostDelete(DeleteView):
     model = Post
-    success_url = reverse_lazy('board:korea')
+    template_name = 'korea/post_delete.html'
+    success_url = reverse_lazy('korea')
 
 
