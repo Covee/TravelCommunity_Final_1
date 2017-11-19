@@ -13,7 +13,9 @@ urlpatterns = [
     url(r'^accounts/logout/', auth_views.logout, name='logout', kwargs={
         'next_page': '/',
     }),
-
+    url(r'^update', auth_views.password_change, name='update', kwargs={
+        'post_change_redirect': '/',
+    }),
 ]
 
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
