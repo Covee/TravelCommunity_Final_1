@@ -26,6 +26,7 @@
                 {% if user.is_authenticated %}
                     <div align="right" style="font-size: 18px;"><span>{{ user }}님이 로그인중입니다.</span><p></p>
                     <p style="font-size: 18px;"><a href={% url 'logout' %}>로그아웃</a>&ensp;</p>
+                    <p style="font-size: 18px;"><a href="/accounts/password/change">회원정보 변경</a>&ensp;</p>
                     </div>
 
                     {% for account in user.socialaccount_set.all %}
