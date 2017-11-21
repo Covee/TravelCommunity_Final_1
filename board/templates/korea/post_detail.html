@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="row">
+    <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="row">
 
@@ -10,13 +10,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <p name="title" style="display: inline;">
-                               {% block title %}
+                                {% block title %}
                                     <b style="font-size: 12px;"> {{ post.id }}&emsp;</style="font-size:></b>
                                     <b style="font-size: 16px;">{{ post.title }}</b>&ensp;<span style="font-size: 14px;" style="color: gray">[{{ post.comments.count }}]</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                                     <i>[작성자 평점(오른쪽에 붙이기)]</i>
                                     {% if user.is_authenticated %}
-                                    <a class="btn btn-info" href="{% url 'post_edit' pk=post.id %}"><span class="glyphicon glyphicon-pencil" ></span></a>
-                                    <a class="btn btn-info" href="{% url 'post_delete' pk=post.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a class="btn btn-info" href="{% url 'post_edit' pk=post.id %}"><span class="glyphicon glyphicon-pencil" ></span></a>
+                                        <a class="btn btn-info" href="{% url 'post_delete' pk=post.id %}"><span class="glyphicon glyphicon-trash"></span></a>
                                     {% endif %}
                                 {% endblock %}
                             </p>
@@ -26,9 +26,9 @@
                         <div class="panel-body">
                             여기 뭐 넣지... 아예 이 박스는 없애는게 좋을 듯
                         </div>
-                        
 
-                        
+
+
                         <span class="label label-default">{{ post.country }}</span>
 
                         {% load static %}
@@ -36,7 +36,7 @@
 
                         <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
                         <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-                        
+
                         <div class="panel panel-default">
                             <div class="panel-body">
 
@@ -58,7 +58,7 @@
                                             <b>DATE</b>: {{ post.modify_date }}
                                         </td>
                                     </tr>
-                                
+
                                 </table>
 
                             </div>
@@ -67,7 +67,7 @@
                         <div class="panel-body mainbody" style="height:auto;">
                             <p style="font-size: 15px;">
                                 {% if post.image %}
-                                <img src='{{ post.image.url }}' style="height: 100%"; width="100%" alt="">
+                                    <img src='{{ post.image.url }}' style="height: 100%"; width="100%" alt="">
                                 {% endif %}
                                 {{ post.content | linebreaks }}
                             </p>
@@ -86,210 +86,319 @@
 
 
                     <h3>댓글<small>(Comments)</small></h3>
+                    <div id="vueComment">
+                        <div v-for="comment in comments">
 
-                    {% for comment in post.comments.all %}
-                    <div class="col-sm-13">
-                        <table class="form-control" border="1" bgcolor="gray" width="1000" style="height: 100%">
-                            <tr>
-                                <td width="100"><strong style="font-size: 18px;">
-                                    {{ comment.user }}    
-                                </strong></td>
-                                <td style="font-size: 13px; text-align: left; width: 715px;">
-                                    {{ comment.message|linebreaks }}    
-                                </td>
-                                <td style="width: 200px;">
-                                    {{ comment.created_at }}    
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    </div>
-                    {% empty %}
-                        <p>댓글이 없습니당</p>
-                    {% endfor %}
-                </div>
+                            <div class="col-sm-13" v-if="comment">
+                                <table class="form-control" border="1" bgcolor="gray" width="1000" style="height: 100%">
+                                    <tr>
+                                        <td width="100"><strong style="font-size: 18px;">
+                                            <{ comment.user_id }>
+                                        </strong></td>
+                                        <td style="font-size: 13px; text-align: left; width: 715px;">
+                                            <{ comment.message }>
+                                        </td>
+                                        <td style="width: 200px;">
+                                            <{ comment.ctime }>
+                                        </td>
+                                        <td style="width: 50px;">
+                                            <button type="button" @click="delComment(comment.id)">삭제</button>
+                                        </td>
+                                    </tr>
+                                </table>
 
-                <hr/>
+                            </div>
+                            <div v-else>
+                                <p>댓글이 없습니당</p>
+                            </div>
 
-                <div class="col-sm-11 well">
-                    <form accept-charset="UTF-8" action="" method="POST">{% csrf_token %}
-                        <textarea class="form-control" id="text" name="text" placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"
-                                  rows="5"></textarea>
-                        <h6 class="pull-right" id="count_message"></h6>
-                        <button class="btn btn-info pull-right" value="Refresh Page" onclick="window.location.reload()" type="submit">댓글 입력</button>
-                        <strong style="font-size: 18px;">{{ post.user }}</strong>
-                    </form>
-                </div>
-
-                <hr>
-
-
-                <div class="col-sm-1 col-md-1 pull-right">
-                    <span class="label label-default">Dsdflt</span>
-                    <div class="panel panel-default">
-                        <div class="panel-body commercial" style="height:2015px;font-size:10px;">
-                            세로 광고
                         </div>
+
+
+                        <hr/>
+
+                        <div class="col-sm-11 well">
+                            <form id="comment_form">
+                    <textarea class="form-control" name="message" placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"
+                              rows="5"></textarea>
+                                <input type="hidden" name="user_id" value="{{ post.user }}">
+                                <input type="hidden" name="post" value="{{ post.id }}">
+                                <h6 class="pull-right" id="count_message"></h6>
+                                <button class="btn btn-info pull-right" v-on:click="createComment" type="button">댓글 입력</button>
+                                <strong style="font-size: 18px;">{{ post.user }}</strong>
+                            </form>
+                        </div>
+
+                        <hr>
                     </div>
-                </div>
-
-                <div class="col-sm-11 col-md-11" style="padding:10px 10px 30px 10px;">
-                    <a class="btn icon-btn btn-primary" style="margin:5px; width:150px; height:40px;" href="#"><span
-                            class="glyphicon btn-glyphicon glyphicon-thumbs-up img-circle text-primary"></span>Like</a>
-                    <a class="btn icon-btn btn-warning" style="margin:5px; width:150px; height:40px;" href="#"><span
-                            class="glyphicon btn-glyphicon glyphicon-minus img-circle text-warning"></span>Hate</a>
-                    <a class="btn icon-btn btn-success pull-right" style="margin:5px; width:150px; height:40px;"
-                       href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add</a>
-                    <a class="btn icon-btn btn-danger pull-right" style="margin:5px; width:150px; height:40px;"
-                       href="#"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Delete</a>
-                    <a class="btn icon-btn btn-info" style="margin:5px; width:150px; height:40px;" href="#"><span
-                            class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>Share</a>
-                </div>
-                
 
 
-                <div class="col-sm-11 col-md-11">
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
+                    <div class="col-sm-1 col-md-1 pull-right">
+                        <span class="label label-default">Dsdflt</span>
+                        <div class="panel panel-default">
+                            <div class="panel-body commercial" style="height:2015px;font-size:10px;">
+                                세로 광고
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="col-sm-11 col-md-11" style="padding:10px 10px 30px 10px;">
+                        <a class="btn icon-btn btn-primary" style="margin:5px; width:150px; height:40px;" href="#"><span
+                                class="glyphicon btn-glyphicon glyphicon-thumbs-up img-circle text-primary"></span>Like</a>
+                        <a class="btn icon-btn btn-warning" style="margin:5px; width:150px; height:40px;" href="#"><span
+                                class="glyphicon btn-glyphicon glyphicon-minus img-circle text-warning"></span>Hate</a>
+                        <a class="btn icon-btn btn-success pull-right" style="margin:5px; width:150px; height:40px;"
+                           href="#"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>Add</a>
+                        <a class="btn icon-btn btn-danger pull-right" style="margin:5px; width:150px; height:40px;"
+                           href="#"><span class="glyphicon btn-glyphicon glyphicon-trash img-circle text-danger"></span>Delete</a>
+                        <a class="btn icon-btn btn-info" style="margin:5px; width:150px; height:40px;" href="#"><span
+                                class="glyphicon btn-glyphicon glyphicon-share img-circle text-info"></span>Share</a>
+                    </div>
 
-                    <div class="input-group">
-                        <div class="input-group-btn search-panel">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span id="search_concept">Filter by</span> <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#contains">Contains</a></li>
-                                <li><a href="#its_equal">It's equal</a></li>
-                                <li><a href="#greather_than">Greather than ></a></li>
-                                <li><a href="#less_than">Less than < </a></li>
-                                <li class="divider"></li>
-                                <li><a href="#all">Anything</a></li>
-                            </ul>
+
+
+                    <div class="col-sm-11 col-md-11">
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
                         </div>
-                        <input type="hidden" name="search_param" value="all" id="search_param">
-                        <input type="text" class="form-control" name="x" placeholder="Search term...">
-                        <span class="input-group-btn">
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-8 col-xs-offset-2">
+
+                        <div class="input-group">
+                            <div class="input-group-btn search-panel">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span id="search_concept">Filter by</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#contains">Contains</a></li>
+                                    <li><a href="#its_equal">It's equal</a></li>
+                                    <li><a href="#greather_than">Greather than ></a></li>
+                                    <li><a href="#less_than">Less than < </a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#all">Anything</a></li>
+                                </ul>
+                            </div>
+                            <input type="hidden" name="search_param" value="all" id="search_param">
+                            <input type="text" class="form-control" name="x" placeholder="Search term...">
+                            <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"><span
                                         class="glyphicon glyphicon-search"></span></button>
                         </span>
 
+                        </div>
+
                     </div>
 
-                </div>
+                    <div class="col-sm-2 col-md-2">
+                    </div>
+                    <div class="col-sm-6 col-md-6">
 
-                <div class="col-sm-2 col-md-2">
-                </div>
-                <div class="col-sm-6 col-md-6">
-
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination" style="width:800px;">
-                            <li>
-                                <a href="#" class="pagination a">
-                                    <<<</a>
-                            </li>
-                            <li>
-                                <a href="#" aria-label="Previous" class="pagination a">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li><a href="#" class="pagination a">1</a></li>
-                            <li><a href="#" class="pagination a">2</a></li>
-                            <li><a href="#" class="pagination a">3</a></li>
-                            <li><a href="#" class="pagination a">4</a></li>
-                            <li><a href="#" class="pagination a">5</a></li>
-                            <li>
-                                <a href="#" aria-label="Next" class="pagination a">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                            <li><a href="#" class="pagination a">>>></a></li>
-                        </ul>
-                    </nav>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" style="width:800px;">
+                                <li>
+                                    <a href="#" class="pagination a">
+                                        <<<</a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Previous" class="pagination a">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li><a href="#" class="pagination a">1</a></li>
+                                <li><a href="#" class="pagination a">2</a></li>
+                                <li><a href="#" class="pagination a">3</a></li>
+                                <li><a href="#" class="pagination a">4</a></li>
+                                <li><a href="#" class="pagination a">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next" class="pagination a">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <li><a href="#" class="pagination a">>>></a></li>
+                            </ul>
+                        </nav>
 
 
-                </div>
+                    </div>
 
 
-                <div class="col-sm-11 col-md-11">
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                                <p>게시글 1</p>
-                                <p>게시글 1</p>
+                    <div class="col-sm-11 col-md-11">
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                    <p>게시글 1</p>
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                    <p>게시글 1</p>
+                                    <p>게시글 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <span class="label label-default">Default</span>
+                            <div class="thumbnail" style="height:230px;">
+                                <div class="caption">
+                                    <p>게시글 1</p>
+                                    <p>게시글 1</p>
+                                    <p>게시글 1</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                                <p>게시글 1</p>
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <span class="label label-default">Default</span>
-                        <div class="thumbnail" style="height:230px;">
-                            <div class="caption">
-                                <p>게시글 1</p>
-                                <p>게시글 1</p>
-                                <p>게시글 1</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            {% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/jquery-1.12.4.min.js"></script>
+    <script src="/static/js/jquery.serializeObject.js"></script>
+    <script type="text/javascript">
+        {#        var post_id = {{ post.id }}#}
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        var vueComment = new Vue({
+            el: '#vueComment',
+            data: {
+                comments: []
+            },
+            methods: {
+                createComment: function() {
+                    $.ajax({
+                        method: 'post',
+                        url:'/board/comments/create_comment',
+                        data: $("#comment_form").serializeObject(),
+                        dataType: "json",
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+                        },
+                        success: function(data) {
+                            $("#comment_form")[0].reset();
+                            vueComment.list_up()
+                        }
+                    })
+                },
+                list_up: function() {
+                    $.ajax({
+                        method: 'post',
+                        url: '/board/comments/list_up_comment',
+                        data: {
+                            id:{{ post.id }}
+                        },
+                        dataType: "json",
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+                        },
+                        success: function (data) {
+                            vueComment.comments = data.data
+                        }
+                    })
+                },
+                delComment: function(id) {
+                    $.ajax({
+                        method: 'post',
+                        url: '/board/comments/del_comment',
+                        data: {id:id},
+                        dataType: "json",
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+                        },
+                        success: function (data) {
+                            vueComment.list_up()
+                        }
+                    })
+                }
+            },
+            created: function () {
+                $.ajax({
+                    method: 'post',
+                    url: '/board/comments/list_up_comment',
+                    data: {
+                        id:{{ post.id }}
+                    },
+                    dataType: "json",
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"))
+                    },
+                    success: function (data) {
+                        vueComment.comments = data.data
+                        console.log(vueComment.comments)
+                    }
+                })
+            },
+            delimiters: ["<{","}>"]
+
+        })
+    </script>
+{% endblock %}

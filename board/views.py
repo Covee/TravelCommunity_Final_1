@@ -51,3 +51,4 @@ class PostDelete(DeleteView):
     success_url = reverse_lazy('korea')
 
 
+
