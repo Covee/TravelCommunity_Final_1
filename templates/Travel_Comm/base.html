@@ -20,13 +20,15 @@
     <div class="row">
         <div class="page-header">
             <h1 style="font-size: 45px;" ><a href="{% url 'home' %}" style=text-decoration:none>리얼 여행 커뮤니티 </a>
-            <small>한 방에 해결하는 여행 준비!</small>
+                <small>한 방에 해결하는 여행 준비!</small>
                 {% load socialaccount %}
 
                 {% if user.is_authenticated %}
                     <div align="right" style="font-size: 18px;"><span>{{ user }}님이 로그인중입니다.</span><p></p>
-                    <p style="font-size: 18px;"><a href={% url 'logout' %}>로그아웃</a>&ensp;</p>
-                    <p style="font-size: 18px;"><a href={% url 'update' %}>회원정보 변경</a>&ensp;</p>
+                        <p style="font-size: 18px;"><a href={% url 'logout' %}>로그아웃</a>&ensp;</p>
+                        <p style="font-size: 18px;"><a href={% url 'update' %}>회원정보 변경</a>&ensp;</p>
+                        <p style="font-size: 18px;"><a href="{% url 'profile' %}">마이 페이지</a>&ensp;</p>
+
                     </div>
 
                     {% for account in user.socialaccount_set.all %}
@@ -44,12 +46,12 @@
                     {% endfor %}
                 {% else %}
                     <p align="right">
-                    <span style="font-size: 22px;"><a href="/accounts/login">로그인</a>&ensp;</span>
-                    <span style="font-size: 20px;"><a href="{% provider_login_url "naver" %}"><img src="/static/naver.jpg" width="40" height="40"></a>&ensp;</span>
-                    <span style="font-size: 20px;"><a href="{% provider_login_url 'facebook' method='oauth2' %}"><img src="/static/FB.png" width="40" height="40"></a>&ensp;</span> 
-                    <span style="font-size: 20px;"><a href="{% provider_login_url "kakao" %}"><img src="/static/kakao.png" width="40" height="40"></a>&ensp;</span>
-                    
-                    <span style="font-size: 22px;"><a href="/accounts/signup">회원가입</a>&ensp;</span>
+                        <span style="font-size: 22px;"><a href="/accounts/login">로그인</a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="{% provider_login_url "naver" %}"><img src="/static/naver.jpg" width="40" height="40"></a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="{% provider_login_url 'facebook' method='oauth2' %}"><img src="/static/FB.png" width="40" height="40"></a>&ensp;</span>
+                        <span style="font-size: 20px;"><a href="{% provider_login_url "kakao" %}"><img src="/static/kakao.png" width="40" height="40"></a>&ensp;</span>
+
+                        <span style="font-size: 22px;"><a href="/accounts/signup">회원가입</a>&ensp;</span>
                     </p>
                 {% endif %}
 
@@ -88,7 +90,7 @@
     </div>
 
     <a href="{% url 'post_add' %}" style="font-size: 15px; color: white;"><button type="button" class="btn btn-info">글쓰기</button></a>
-    
+
 
     {% block content %}
     {% endblock %}

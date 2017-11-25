@@ -17,3 +17,7 @@ class CreateUserView(CreateView):
 
 class RegisteredView(TemplateView):
     template_name = 'registration/register_done.html'
+
+
+class ProfileView(TemplateView):
+    template_name = 'Travel_Comm/profile.html'
