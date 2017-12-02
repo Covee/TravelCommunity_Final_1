@@ -159,3 +159,5 @@ LOGOUT_URL = '/accounts/logout/'
 EL_PAGINATION_PER_PAGE = 9
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STAR_RATINGS_RERATE = False
