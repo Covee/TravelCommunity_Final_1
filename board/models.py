@@ -17,6 +17,7 @@ class Post(models.Model):
     modify_date = models.DateTimeField('Modify Date', auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(blank=True, null=True, upload_to='upload/%Y/%m/%d/orig')
+    video = models.FileField(blank=True, null=True, upload_to='upload/%Y/%m/%d/video')
     filtered_image = models.ImageField(blank=True, null=True,
                                        upload_to='upload/%Y/%m/%d/filtered')
     

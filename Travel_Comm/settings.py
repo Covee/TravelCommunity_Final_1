@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.kakao',
     'star_ratings',
     'django_countries',
+    'accounts',
 
 ]
 
@@ -161,3 +162,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STAR_RATINGS_RERATE = False
+
+#SOCIALACCOUNT_AUTO_SIGNUP = False
+#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+

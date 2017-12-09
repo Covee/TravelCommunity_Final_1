@@ -28,7 +28,7 @@ class PostAdd(FormView):
     model = Post
     template_name = 'korea/post_add.html'
     form_class = PostForm
-    fields = ['title', 'country','content','image']
+    fields = ['title', 'country','content','image','video']
     success_url = reverse_lazy('korea')
 
     def form_valid(self, form):

@@ -8,7 +8,7 @@ from django.forms import ModelForm, Textarea
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'country', 'content', 'image',]
+        fields = ['title', 'country', 'content', 'image','video']
         widgets = {'country': CountrySelectWidget(),
                    'content': Textarea(attrs={'class': 'form-control' })
             }
@@ -17,7 +17,7 @@ class PostForm(forms.ModelForm):
 class PostEditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'country', 'content', 'image',]
+        fields = ['title', 'country', 'content', 'image','video']
         widgets = {'country': CountrySelectWidget(),
                    'content': Textarea(attrs={'class': 'form-control' })
             }
