@@ -78,6 +78,11 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
 WSGI_APPLICATION = 'Travel_Comm.wsgi.application'
 
 # Database
@@ -166,3 +171,6 @@ STAR_RATINGS_RERATE = False
 #SOCIALACCOUNT_AUTO_SIGNUP = False
 #ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
+# 회원가입 후 페이지 redirect 안됬던 이유, allauth가 이메일 validation을 확인하는 절차가 있음에도 불구하고,
+# 그 옵션을 넣어 두지 않았기 때문에 계속 connecting 오류가 떴음. ↓↓↓
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
