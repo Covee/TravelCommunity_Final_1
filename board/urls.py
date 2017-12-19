@@ -9,7 +9,7 @@ urlpatterns = [
 
     url(r'^$', PostList.as_view(), name='post_list'),
     url(r'^korea/$', KoreaBoard.as_view(), name='korea'),
-    url(r'^korea/(?P<pk>\d+)/(\w*)$', PostDetail.as_view(), name='post_detail'),
+    url(r'^korea/(?P<pk>\d+)/(\w*)$', PostDetail.as_view()),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
     #url(r'^korea/(?P<pk>\d+)/', add, name='add_comment'),
 
