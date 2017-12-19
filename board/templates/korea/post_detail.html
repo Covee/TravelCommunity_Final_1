@@ -102,7 +102,7 @@
                                             <{ comment.ctime }>
                                         </td>
                                         <td style="width: 50px;">
-                                            <button v-if="comment.user_id == '{{ request.user }}'" type="button" @click="delComment(comment.id)">삭제</button>
+                                            <button v-if="comment.user_id == '{{ request.session.user }}'" type="button" @click="delComment(comment.id)">삭제</button>
                                         </td>
                                     </tr>
                                 </table>

@@ -175,7 +175,6 @@ def logged_in(sender, **kwargs):
     user = str(kwargs['user'])
     request = kwargs['request']
     request.session['user'] = user
-    print(request.session)
 
 
 user_logged_in.connect(logged_in)

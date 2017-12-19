@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, View, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.core.urlresolvers import reverse_lazy
+
 from .models import Post, Comment
 from .forms import CommentForm, PostForm, PostEditForm
 
@@ -16,8 +17,11 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
-    print(model)
     template_name = 'korea/post_detail.html'
+
+    def list_up(request):
+        global template_name
+        return render(request, template_name)
 
 
 class KoreaBoard(ListView):
