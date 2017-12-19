@@ -1,5 +1,7 @@
 import os
 
+from allauth.account.signals import user_logged_in
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -168,8 +170,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STAR_RATINGS_RERATE = False
 
-#SOCIALACCOUNT_AUTO_SIGNUP = False
-#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+def logged_in(sender, **kwargs):
+    user = str(kwargs['user'])
+    request = kwargs['request']
+    request.session['user'] = user
+    print(request.session)
+
+
+user_logged_in.connect(logged_in)
+
+
+# SOCIALACCOUNT_AUTO_SIGNUP = False
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 # 회원가입 후 페이지 redirect 안됬던 이유, allauth가 이메일 validation을 확인하는 절차가 있음에도 불구하고,
 # 그 옵션을 넣어 두지 않았기 때문에 계속 connecting 오류가 떴음. ↓↓↓

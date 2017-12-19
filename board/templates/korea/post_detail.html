@@ -102,7 +102,7 @@
                                             <{ comment.ctime }>
                                         </td>
                                         <td style="width: 50px;">
-                                            <button type="button" @click="delComment(comment.id)">삭제</button>
+                                            <button v-if="comment.user_id == '{{ request.user }}'" type="button" @click="delComment(comment.id)">삭제</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -121,11 +121,11 @@
                             <form id="comment_form">
                     <textarea class="form-control" name="message" placeholder="선정적, 극단적인 비속어는 통보없이 삭제 및 차단 될 수 있습니다"
                               rows="5"></textarea>
-                                <input type="hidden" name="user_id" value="{{ post.user }}">
+                                <input type="hidden" name="user_id" value="{{ request.user }}">
                                 <input type="hidden" name="post" value="{{ post.id }}">
                                 <h6 class="pull-right" id="count_message"></h6>
                                 <button class="btn btn-info pull-right" v-on:click="createComment" type="button">댓글 입력</button>
-                                <strong style="font-size: 18px;">{{ post.user }}</strong>
+                                <strong style="font-size: 18px;">{{ request.user }}</strong>
                             </form>
                         </div>
 

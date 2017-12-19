@@ -16,6 +16,7 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
+    print(model)
     template_name = 'korea/post_detail.html'
 
 
