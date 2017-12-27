@@ -10,15 +10,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <style>
-    body{
-        background-image:url('static/nightview.jpg');
-        background-repeat: no-repeat;
-        background-size: 100%;
-        background-attachment: fixed;
-        
-    }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Travel_Comm/css/style.css' %}" />
+
     <title>리얼 여행 커뮤니티</title>
 </head>
 
@@ -27,11 +21,11 @@
     <div class="row">
         <div class="page-header">
             <h1 style="font-size: 45px;" ><a href="{% url 'home' %}" style=text-decoration:none>리얼 여행 커뮤니티 </a>
-                <small>한 방에 해결하는 여행 준비!</small>
+                <small style="color: white;">한 방에 해결하는 여행 준비!</small>
                 {% load socialaccount %}
 
                 {% if user.is_authenticated %}
-                    <div align="right" style="font-size: 18px;"><span>{{ user }}님이 로그인중입니다.</span><p></p>
+                    <div align="right" style="font-size: 18px; color: white;"><span><strong style="font-size: 25px;">{{ user }}</strong> 님이 로그인중입니다.</span><p></p>
                         <p style="font-size: 18px;"><a href={% url 'logout' %}>로그아웃</a>&ensp;</p>
                         <p style="font-size: 18px;"><a href={% url 'update' %}>회원정보 변경</a>&ensp;</p>
                         <p style="font-size: 18px;"><a href="{% url 'profile' %}">마이 페이지</a>&ensp;</p>
@@ -49,7 +43,7 @@
                         <small>Dashboard Link:
                             <a href="{{ account.extra_data.link }}">{{ account.extra_data.link }}</a></small>
                     {% empty %}
-                        <p align="right" style="font-size: 18px;">you have no Social Accounts saved in this site</p>
+                        <p align="right" style="font-size: 18px; color: white;">소셜로그인이 저장되어 있지 않습니다</p>
                     {% endfor %}
                 {% else %}
                     <p align="right">
